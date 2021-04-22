@@ -1,7 +1,9 @@
 const playerChoiceElement = document.getElementById("playerChoice");
 const computerChoiceElement = document.getElementById("computerChoice");
+var playerCounter=0, computerCounter=0;
 
 const resultElement = document.getElementById("result");
+const counter = document.getElementById("counter");
 
 const buttons = document.querySelectorAll("button");
 
@@ -32,7 +34,16 @@ function startGame(event) {
   //   } else if (playerWins === "draw") {
   //     result.textContent = "EMPATASTE";
   //   }
-
+  counter.textContent=playerCounter +"-"+ computerCounter;
+  if(playerCounter == 3){
+    counter.textContent="PLAYER WINS";
+    playerCounter=0;
+    computerCounter=0;
+  }else if(computerCounter == 3){
+    counter.textContent="COMPUTER WINS";
+    playerCounter=0;
+    computerCounter=0;
+  }
   resultElement.textContent = winner;
 }
 
@@ -55,10 +66,12 @@ function setWinner(playerChoice, computerChoice) {
     (playerChoice === "paper" && computerChoice === "rock") ||
     (playerChoice === "scissors" && computerChoice === "paper")
   ) {
+    playerCounter++;
     return "GANASTE";
   } else if (playerChoice === computerChoice) {
     return "EMPATASTE";
   } else {
+    computerCounter++;
     return "PERDISTE";
   }
 }
